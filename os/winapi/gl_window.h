@@ -20,6 +20,13 @@
 
 #define FRAMEBUF_SZ (640 * 474 * 4)
 #define CEN64_GL_WINDOW_BAD (NULL)
+
+#ifdef HAS_SDL
+  typedef SDL_GameController *controller;
+#else
+  typedef char Controller;
+#endif
+
 struct cen64_gl_window {
   HINSTANCE hinstance;
   HWND hwnd;
@@ -32,6 +39,8 @@ struct cen64_gl_window {
   uint8_t frame_buffer[FRAMEBUF_SZ];
   unsigned frame_hres, frame_vres;
   unsigned frame_hskip, frame_type;
+
+  Controller *controller;
 
   cen64_mutex event_mutex;
   bool exit_requested;
@@ -55,6 +64,9 @@ static inline void cen64_gl_window_destroy(cen64_gl_window window) {
 
   cen64_mutex_destroy(&window->render_mutex);
   cen64_mutex_destroy(&window->event_mutex);
+
+  controller_teardown_controllers(window);
+
   free(window);
 }
 

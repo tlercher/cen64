@@ -173,6 +173,12 @@ int ai_init(struct ai_controller *ai,
   return 0;
 }
 
+int ai_destroy(struct ai_controller *ai) {
+  if (ai->no_output == 0) {
+    ai_context_destroy(&ai->ctx);
+  }
+}
+
 // Reads a word from the AI MMIO register space.
 int read_ai_regs(void *opaque, uint32_t address, uint32_t *word) {
   struct ai_controller *ai = (struct ai_controller *) opaque;

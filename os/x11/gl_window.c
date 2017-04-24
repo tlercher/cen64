@@ -70,6 +70,8 @@ cen64_gl_window cen64_gl_window_create(
   window->wm_delete_window = XInternAtom(display, "WM_DELETE_WINDOW", False);
   XSetWMProtocols(display, window->window, &window->wm_delete_window, 1);
 
+  controller_initialize_controllers(window);
+
   window->exit_requested = false;
   window->display = display;
   window->screen = screen;
@@ -81,6 +83,8 @@ bool cen64_gl_window_pump_events(struct vi_controller *vi) {
   bool released, exit_requested = false;
   XEvent event;
 
+  controller_poll_events(vi);
+
   if (!XPending(vi->display))
     return false;
 
@@ -88,6 +92,7 @@ bool cen64_gl_window_pump_events(struct vi_controller *vi) {
 
   do {
     XNextEvent(vi->display, &event);
+
 
     switch (event.type) {
       case ClientMessage:

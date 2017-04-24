@@ -129,6 +129,7 @@ struct cen64_device *device_create(struct cen64_device *device,
 // Cleans up memory allocated for the device.
 void device_destroy(struct cen64_device *device) {
   rsp_destroy(&device->rsp);
+  ai_destroy(&device->ai);
 }
 
 // Called when we should (probably?) leave simulation.

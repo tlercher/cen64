@@ -81,6 +81,11 @@ Network Trash Folder
 Temporary Items
 .directory
 
+# IDEs / Editors #
+##################
+.vscode
+.idea
+
 # CVS #
 ######################
 /CVS/*

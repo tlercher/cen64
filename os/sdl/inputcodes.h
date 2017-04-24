@@ -1,0 +1,42 @@
+//
+// os/sdl/inputcodes.h: SDL inputcode definitions.
+//
+// CEN64: Cycle-Accurate Nintendo 64 Emulator.
+// Copyright (C) 2015, Tyler J. Stachecki.
+//
+// This file is subject to the terms and conditions defined in
+// 'LICENSE', which is part of this source code package.
+//
+
+#ifndef CEN64_OS_SDL_INPUTCODES
+#define CEN64_OS_SDL_INPUTCODES
+#include <SDL2/SDL.h>
+
+// Analog stick.
+#define CEN64_STICK_AXIS_X SDL_CONTROLLER_AXIS_LEFTX
+#define CEN64_STICK_AXIS_Y SDL_CONTROLLER_AXIS_LEFTY
+
+// L/R flippers + Z Button as trigger
+#define CEN64_FLP_L SDL_CONTROLLER_BUTTON_LEFTSHOULDER
+#define CEN64_FLP_R SDL_CONTROLLER_BUTTON_RIGHTSHOULDER
+#define CEN64_FLP_Z_TRIGGER SDL_CONTROLLER_AXIS_TRIGGERRIGHT
+
+// A/B/Z/S
+#define CEN64_BTN_A SDL_CONTROLLER_BUTTON_A
+#define CEN64_BTN_B SDL_CONTROLLER_BUTTON_X
+#define CEN64_BTN_Z SDL_CONTROLLER_BUTTON_B
+#define CEN64_BTN_START SDL_CONTROLLER_BUTTON_START
+
+
+// C-pad.
+#define CEN64_CPAD_AXIS_X SDL_CONTROLLER_AXIS_RIGHTX
+#define CEN64_CPAD_AXIS_Y SDL_CONTROLLER_AXIS_RIGHTY
+
+// D-pad
+#define CEN64_DPAD_LEFT SDL_CONTROLLER_BUTTON_DPAD_LEFT
+#define CEN64_DPAD_RIGHT SDL_CONTROLLER_BUTTON_DPAD_RIGHT
+#define CEN64_DPAD_UP SDL_CONTROLLER_BUTTON_DPAD_UP
+#define CEN64_DPAD_DOWN SDL_CONTROLLER_BUTTON_DPAD_DOWN
+
+#endif
+

@@ -49,6 +49,8 @@ bool cen64_gl_window_pump_events(struct vi_controller *vi,
 
   memcpy(&bus, vi, sizeof(bus));
 
+  controller_poll_events(vi);
+
   while (1) {
     GetMessage(&msg, NULL, 0, 0);
 

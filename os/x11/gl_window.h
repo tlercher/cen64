@@ -21,6 +21,13 @@
 
 #define FRAMEBUF_SZ (640 * 474 * 4)
 #define CEN64_GL_WINDOW_BAD (NULL)
+
+#ifdef HAS_SDL
+typedef SDL_GameController Controller;
+#else
+typedef char Controller;
+#endif
+
 struct cen64_gl_window {
   cen64_gl_display display;
   cen64_gl_screen screen;
@@ -29,6 +36,8 @@ struct cen64_gl_window {
   Atom wm_delete_window;
   XSetWindowAttributes attr;
   XVisualInfo *visual_info;
+
+  Controller *controller;
 
   int pipefds[2];
 
@@ -62,6 +71,9 @@ static inline void cen64_gl_window_destroy(cen64_gl_window window) {
 
   cen64_mutex_destroy(&window->render_mutex);
   cen64_mutex_destroy(&window->event_mutex);
+
+  controller_teardown_controllers(window);
+
   free(window);
 }
 

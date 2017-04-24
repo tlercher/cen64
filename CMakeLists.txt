@@ -24,6 +24,7 @@ find_package(Threads REQUIRED)
 if (NOT WIN32)
   find_package(Iconv REQUIRED)
 endif ()
+find_package(SDL)
 
 # If using GCC, configure it accordingly.
 if (${CMAKE_C_COMPILER_ID} MATCHES GNU)
@@ -296,6 +297,10 @@ set(OS_POSIX_SOURCES
   ${PROJECT_SOURCE_DIR}/os/posix/timer.c
 )
 
+set(OS_SDL_SOURCES
+  ${PROJECT_SOURCE_DIR}/os/sdl/input.c
+)
+
 set(OS_WINAPI_SOURCES
   ${PROJECT_SOURCE_DIR}/os/winapi/alloc.c
   ${PROJECT_SOURCE_DIR}/os/winapi/cpuid.c
@@ -398,6 +403,14 @@ else ()
   )
 endif (DEFINED WIN32)
 
+if (WITH_SDL)
+  include_directories(${PROJECT_SOURCE_DIR}/os/sdl)
+
+  list(APPEND OS_SOURCES
+    ${OS_SDL_SOURCES}
+  )
+endif (WITH_SDL)
+
 #
 # Glob all the files together.
 #
@@ -449,6 +462,7 @@ target_link_libraries(cen64
   ${OPENGL_gl_LIBRARY}
   ${ICONV_LIBRARIES}
   ${X11_X11_LIB}
+  ${SDL_LIBRARIES}
   ${CMAKE_THREAD_LIBS_INIT}
 )
 
